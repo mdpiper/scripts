@@ -1,2 +1,2 @@
 # scripts
-Handy scripts for my bin directory
+Handy scripts for my **bin** directory. Mostly bash.
