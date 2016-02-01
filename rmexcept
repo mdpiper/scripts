@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Removes all files and directories except for the input.
+
+find . -not -name $1 -not -name . -delete

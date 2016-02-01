@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Removes temporary files and such.
+
+types="*~ *.pyc #*"
+echo "Removing:"
+rm -fv $types

@@ -1,0 +1,4 @@
+#! /usr/bin/env bash
+# Pretty-prints $PATH
+
+tr : '\n' <<< $PATH

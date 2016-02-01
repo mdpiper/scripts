@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Validates a JSON file.
+
+python -mjson.tool $1
