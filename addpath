@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Adds a directory to the PATH environment variable.
+#
+# This script must be called with `source`:
+#
+#    $ source addpath /new/path
+
+echo "Adding $1 to PATH"
+export PATH=$1:$PATH
