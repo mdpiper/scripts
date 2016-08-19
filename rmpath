@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Removes a directory from the PATH environment variable.
+#
+# This script must be called with `source`:
+#
+#    $ source rmpath /the/path
+
+echo "Removing $1 from PATH"
+replace="$1:"
+empty=""
+newpath=${PATH/$replace/$empty}
+export PATH=$newpath
