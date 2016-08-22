@@ -5,6 +5,16 @@
 #
 #    $ source rmpath /the/path
 
+if [[ "$(basename "$0" 2> /dev/null)" == "rmpath" ]]; then
+    (>&2 echo "Usage: rmpath must be sourced. Run 'source rmpath /the/path'.")
+    exit 1
+fi
+
+if [[ $# -ne 1 ]]; then
+    (>&2 echo "rmpath: specify one path to be removed.")
+    return 1
+fi
+
 echo "Removing $1 from PATH"
 replace="$1:"
 empty=""
