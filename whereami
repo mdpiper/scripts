@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+# Only for blanca, really.
+
+release=`cat /etc/redhat-release`
+if [[ $release = *"6."* ]]; then
+  echo "Login node ($release)";
+else
+  echo "Compute node ($release)";
+fi
+exit 0
