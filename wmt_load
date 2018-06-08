@@ -8,6 +8,7 @@
 #   -d loads the module to wmt-dakota (optional)
 #   -f loads the module to wmt-topoflow (optional)
 #   -p loads the module to wmt-permafrost (optional)
+#   -s loads the module to wmt-staging (optional)
 #   -h shows the help message
 #
 # Usage:
@@ -17,15 +18,13 @@
 #   $ wmt_load -d
 #   $ wmt_load -f
 #   $ wmt_load -p
-#
-# Mark Piper, 2014
+#   $ wmt_load -s
 
 # Help text.
 help="Usage: wmt_load [-t] [-a] [-d] [-f] [-p] [-s] [-h]"
 
 # Read parameters, parse into variables.
 testing="false"
-stable="false"
 while getopts ":tadfpsh" opt; do
   case $opt in
   t)
@@ -44,7 +43,7 @@ while getopts ":tadfpsh" opt; do
       permafrost="true"
       ;;
   s)
-      stable="true"
+      staging="true"
       ;;
   h)
       echo -e $help
@@ -85,10 +84,10 @@ elif [[ $topoflow = "true" ]]; then
   load_path="wmt-topoflow"
 elif [[ $permafrost = "true" ]]; then
   load_path="wmt-permafrost"
-elif [[ $stable = "true" ]]; then
-  load_path="wmt-stable"
+elif [[ $staging = "true" ]]; then
+  load_path="wmt-staging"
 else
-  load_path="wmt"
+  load_path="wmt-testing"
 fi
 
 # For backward compatibility, create "WMT.html" and place in the module's 
