@@ -3,11 +3,17 @@
 #
 # This script must be called with `source`:
 #
-#    $ source rmpath /the/path
+#    $ source rmpath [-q] /the/path
 
 if [[ "$(basename "$0" 2> /dev/null)" == "rmpath" ]]; then
     (>&2 echo "Usage: rmpath must be sourced. Run 'source rmpath /the/path'.")
     exit 1
+fi
+
+quiet="false"
+if [[ $1 = "-q" ]]; then
+    quiet="true"
+    shift
 fi
 
 if [[ $# -ne 1 ]]; then
@@ -15,7 +21,9 @@ if [[ $# -ne 1 ]]; then
     return 1
 fi
 
-echo "Removing $1 from PATH"
+if [[ $quiet = "false" ]]; then
+    echo "Removing $1 from PATH"
+fi
 replace="$1:"
 empty=""
 newpath=${PATH/$replace/$empty}
