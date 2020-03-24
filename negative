@@ -1,0 +1,5 @@
+#! /usr/bin/env bash
+# Open a PDF in Negative.
+
+open $1 -a Negative
+exit 0
