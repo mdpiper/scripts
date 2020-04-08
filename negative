@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
-# Open a PDF in Negative.
+# Open one or more PDF files in Negative.
 
-open $1 -a Negative
+for arg in "$@"; do
+    open $arg -a Negative
+done
 exit 0
