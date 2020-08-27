@@ -1,0 +1,39 @@
+#! /usr/bin/env bash
+# Render a Markdown or reStructuredText file as HTML and view in a browser
+# on macOS. Edge case: view Markdown directly on Chrome.
+
+help="Usage: mview [-c] [-h]"
+browser="Firefox"
+markup="markdown"
+extension="${1##*.}"
+if [[ $extension = "rst" ]]; then
+    markup=$extension
+fi
+
+while getopts ":ch" opt; do
+  case $opt in
+  c)
+      browser="Google Chrome"
+      ;;
+  h)
+      echo -e $help
+      exit 0
+      ;;
+  \?)
+      # Catches invalid flag.
+      echo "Invalid option: -$OPTARG" >&2
+      echo -e $help
+      exit 1
+      ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if [[ $browser = "Google Chrome" && $markup = "markdown" ]]; then
+    open $1 -a "Google Chrome"  
+else
+    pandoc $1 --from $markup --to html -o $1.html
+    open $1.html -a $browser
+fi
+
+exit 0
