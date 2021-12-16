@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+# Open one or more PDF files in PDF Viewer.
+
+for arg in "$@"; do
+    open "$arg" -a "PDF Viewer"
+done
+exit 0
