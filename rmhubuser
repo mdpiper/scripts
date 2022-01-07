@@ -1,0 +1,22 @@
+#! /usr/bin/env bash
+# Remove a user from a tljh instance.
+
+help="Usage: rmhubuser USER VOLUME"
+if [[ $1 = "-h" ]]; then
+    echo -e $help
+    exit 0
+fi
+
+user=jupyter-$1
+volume=$2  # e.g., nvme0n1p1 for `lab` instance
+
+if id $user &>/dev/null; then
+    sudo -E du -hs /home/jupyter-$1
+    sudo -E rm -rf /home/jupyter-$1
+    sudo -E userdel jupyter-$1
+    df | grep $volume
+    echo "User $1 removed"
+else
+    echo "User $1 not found"
+fi
+exit 0
