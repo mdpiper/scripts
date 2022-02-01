@@ -7,14 +7,11 @@ if [[ $1 = "-h" ]]; then
     exit 0
 fi
 
-user=jupyter-$1
-volume=$2  # e.g., nvme0n1p1 for `lab` instance
-
 if id $user &>/dev/null; then
-    sudo -E du -hs /home/jupyter-$1
-    sudo -E rm -rf /home/jupyter-$1
-    sudo -E userdel jupyter-$1
-    df | grep $volume
+    sudo -E du -hs /home/$1
+    sudo -E rm -rf /home/$1
+    sudo -E userdel $1
+    df | grep $2  # volume name; e.g., nvme0n1p1 for `lab` instance
     echo "User $1 removed"
 else
     echo "User $1 not found"
