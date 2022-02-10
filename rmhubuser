@@ -1,17 +1,17 @@
 #! /usr/bin/env bash
 # Remove a user from a tljh instance.
 
-help="Usage: rmhubuser USER VOLUME"
+help="Usage: rmhubuser USER"
 if [[ $1 = "-h" ]]; then
     echo -e $help
     exit 0
 fi
 
+user=jupyter-$1
+
 if id $user &>/dev/null; then
-    sudo -E du -hs /home/$1
-    sudo -E rm -rf /home/$1
-    sudo -E userdel $1
-    df | grep $2  # volume name; e.g., nvme0n1p1 for `lab` instance
+    sudo -E du -hs /home/$user
+    sudo -E deluser $user --remove-home
     echo "User $1 removed"
 else
     echo "User $1 not found"
