@@ -2,8 +2,10 @@
 # Script my typical cmake build process.
 
 build_type=Release
+build_dir=_build
 
-mkdir -p _build && cd _build
+if [ -e $build_dir ]; then rm -r $build_dir; fi
+mkdir $build_dir && cd $build_dir
 
 cmake .. \
     -DCMAKE_BUILD_TYPE=$build_type \
