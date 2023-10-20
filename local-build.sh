@@ -12,6 +12,7 @@ cmake .. \
     -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX
 
 make -s
+if [ $? != 0 ]; then exit 1; fi
 
 if test -n "$(find . -maxdepth 1 -name 'test*' -print -quit)"; then
     ctest
