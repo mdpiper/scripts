@@ -1,8 +1,42 @@
 #! /usr/bin/env bash
 # Script my typical cmake build process.
 
+help() {
+    echo -e "Usage: mbuild [-d | --dest-dir] [-h | --help]"
+    exit 0
+}
+
+if [ "$#" == 0 ]; then
+    help
+fi
+
+dest_dir=
+
+i=1;
+for argument in "$@"; do
+    # echo "Argument $i: $argument";
+    case $argument in
+        -h|--help)
+            help
+            ;;
+        -d|--dest-dir)
+            dest_dir=$PWD/_install
+            ;;
+        -?*)
+            help
+            ;;
+        *)
+            help
+            ;;
+    esac
+
+    i=$((i + 1));
+done
+
 build_type=Release
 build_dir=_build
+
+if [ -e $dest_dir ]; then rm -r $dest_dir; fi
 
 if [ -e $build_dir ]; then rm -r $build_dir; fi
 mkdir $build_dir && cd $build_dir
@@ -21,7 +55,7 @@ fi
 if [ $? != 0 ]; then
     exit 1
 else
-    make install
+    make DESTDIR=$dest_dir install
 fi
 
 exit 0
