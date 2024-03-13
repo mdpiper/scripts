@@ -2,7 +2,7 @@
 # Script my typical cmake build process.
 
 help() {
-    echo -e "Usage: mbuild [-d | --dest-dir] [-h | --help]"
+    echo -e "Usage: mbuild [-dd | --dest-dir] [-h | --help]"
     exit 0
 }
 
@@ -14,7 +14,7 @@ for argument in "$@"; do
         -h|--help)
             help
             ;;
-        -d|--dest-dir)
+        -dd|--dest-dir)
             dest_dir=$PWD/_install
             ;;
         -?*)
