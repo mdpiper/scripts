@@ -2,10 +2,15 @@
 # Script my typical cmake build process.
 
 help() {
-    echo -e "Usage: mbuild [-dd | --dest-dir] [-h | --help]"
+    echo -e "Usage: mbuild [-c | --config-only] [-m | --make-only]
+              [-s | --skip-tests] [-dd | --dest-dir]
+              [-h | --help]"
     exit 0
 }
 
+config_only=false
+make_only=false
+skip_tests=false
 dest_dir=
 
 i=1;
@@ -13,6 +18,15 @@ for argument in "$@"; do
     case $argument in
         -h|--help)
             help
+            ;;
+        -c|--config-only)
+            config_only=true
+            ;;
+        -m|--make-only)
+            make_only=true
+            ;;
+        -s|--skip-tests)
+            skip_tests=true
             ;;
         -dd|--dest-dir)
             dest_dir=$PWD/_install
@@ -39,12 +53,14 @@ mkdir $build_dir && cd $build_dir
 cmake .. \
     -DCMAKE_BUILD_TYPE=$build_type \
     -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX
+if $config_only; then exit 0; fi
 
 make -s
 if [ $? != 0 ]; then exit 1; fi
+if $make_only; then exit 0; fi
 
 if test -n "$(find . -maxdepth 1 -name 'test*' -print -quit)"; then
-    ctest
+    if [ ! $skip_tests ]; then ctest; fi
 fi
 
 if [ $? != 0 ]; then
@@ -54,4 +70,3 @@ else
 fi
 
 exit 0
-
