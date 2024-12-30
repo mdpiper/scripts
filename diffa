@@ -1,0 +1,53 @@
+#! /usr/bin/env bash
+# Diff a file of the same name between two directories.
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+PURPLE='\033[0;35m'
+YELLOW='\033[0;33m'
+NC='\033[0m' # no color
+
+help() {
+    echo -e "${YELLOW}Usage${NC}: diffa FILE DIRECTORY [-h | --help]"
+}
+
+error() {
+    echo -e ${PURPLE}$1${NC}
+    help
+    exit 1
+}
+
+show() {
+    echo -e "${2}File${NC}: $1"
+}
+
+i=1;
+for argument in "$@"; do
+    case $argument in
+        -h|--help)
+            help && exit 0
+            ;;
+        -?*)
+            help && exit 0
+            ;;
+    esac
+
+    i=$((i + 1));
+done
+
+if [ ! -d $2 ]; then
+    error "Not a directory: $2"
+fi
+
+file1=$1
+show ${file1} ${RED}
+file2=$2/${file1}
+show ${file2} ${GREEN}
+
+if [ ! -f ${file2} ]; then
+    error "File does not exist: ${file2}"
+fi
+
+diff -u --color=always $file1 $file2
+
+exit 0
