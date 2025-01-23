@@ -11,7 +11,7 @@ help() {
 config_only=false
 make_only=false
 skip_tests=false
-dest_dir=
+dest_dir=$CONDA_PREFIX
 
 i=1;
 for argument in "$@"; do
@@ -45,28 +45,21 @@ done
 build_type=Release
 build_dir=_build
 
-if [ -e $dest_dir ]; then rm -rf $dest_dir; fi
-
-if [ -e $build_dir ]; then rm -r $build_dir; fi
-mkdir $build_dir && cd $build_dir
-
-cmake .. \
-    -DCMAKE_BUILD_TYPE=$build_type \
-    -DCMAKE_INSTALL_PREFIX=$CONDA_PREFIX
+cmake -B $build_dir --fresh -DCMAKE_BUILD_TYPE=$build_type
 if $config_only; then exit 0; fi
 
-make -s
+cmake --build $build_dir
 if [ $? != 0 ]; then exit 1; fi
 if $make_only; then exit 0; fi
 
 if [ $skip_tests = false ]; then
-    ctest --test-dir .
+    ctest --test-dir $build_dir
 fi
 
 if [ $? != 0 ]; then
     exit 1
 else
-    make DESTDIR=$dest_dir install
+    cmake --install $build_dir --prefix $dest_dir
 fi
 
 exit 0
