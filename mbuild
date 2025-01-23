@@ -2,9 +2,20 @@
 # Script my typical cmake build process.
 
 help() {
-    echo -e "Usage: mbuild [-c | --config-only] [-m | --make-only]
-              [-s | --skip-tests] [-dd | --dest-dir]
-              [-h | --help] [-v | --verbose]"
+    echo -e \
+"Usage
+
+    mbuild [options]
+
+Options
+
+    -c, --config-only   Configure project; don't make or install
+    -m, --make-only     Configure and make project; don't install
+    -s, --skip-tests    Don't run ctest
+    -dd, --dest-dir     Use a local install directory (_install)
+    -h, --help          Show this help message
+    -v, --verbose       Enable verbose output
+"
     exit 0
 }
 
