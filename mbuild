@@ -4,7 +4,7 @@
 help() {
     echo -e "Usage: mbuild [-c | --config-only] [-m | --make-only]
               [-s | --skip-tests] [-dd | --dest-dir]
-              [-h | --help]"
+              [-h | --help] [-v | --verbose]"
     exit 0
 }
 
@@ -12,6 +12,7 @@ config_only=false
 make_only=false
 skip_tests=false
 dest_dir=$CONDA_PREFIX
+verbose=
 
 i=1;
 for argument in "$@"; do
@@ -27,6 +28,9 @@ for argument in "$@"; do
             ;;
         -s|--skip-tests)
             skip_tests=true
+            ;;
+        -v|--verbose)
+            verbose=-V
             ;;
         -dd|--dest-dir)
             dest_dir=$PWD/_install
@@ -53,7 +57,7 @@ if [ $? != 0 ]; then exit 1; fi
 if $make_only; then exit 0; fi
 
 if [ $skip_tests = false ]; then
-    ctest --test-dir $build_dir
+    ctest $verbose --test-dir $build_dir
 fi
 
 if [ $? != 0 ]; then
