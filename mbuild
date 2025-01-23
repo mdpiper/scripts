@@ -59,8 +59,8 @@ make -s
 if [ $? != 0 ]; then exit 1; fi
 if $make_only; then exit 0; fi
 
-if test -n "$(find . -maxdepth 1 -name 'test*' -print -quit)"; then
-    if [ ! $skip_tests ]; then ctest; fi
+if [ $skip_tests = false ]; then
+    ctest --test-dir .
 fi
 
 if [ $? != 0 ]; then
