@@ -60,7 +60,7 @@ done
 build_type=Release
 build_dir=_build
 
-cmake -B $build_dir --fresh -DCMAKE_BUILD_TYPE=$build_type
+cmake -B $build_dir --fresh -DCMAKE_BUILD_TYPE=$build_type -DCMAKE_INSTALL_PREFIX=$dest_dir
 if $config_only; then exit 0; fi
 
 cmake --build $build_dir
