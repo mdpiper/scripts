@@ -232,7 +232,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 /* Custom styles */
 html, body {
     font-family: 'Gill Sans', 'Ubuntu Sans', 'Trebuchet', sans-serif;
-    font-size: 120%;
 }
 h1 {color: cornflowerblue}
 h2 {color: burlywood}
