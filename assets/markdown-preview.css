@@ -1,0 +1,12 @@
+/* Styles for my Markdown preview program */
+
+h1, h2, h3, p {
+    font-family: 'Gill Sans', 'Ubuntu Sans', sans-serif;
+}
+h1 {color: cornflowerblue}
+h2 {color: burlywood}
+h3 {color: seagreen}
+p {line-height: 125%}
+code {
+    font-size: 120%;
+}
