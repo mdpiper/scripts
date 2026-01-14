@@ -30,7 +30,7 @@ while getopts ":uh" opt; do
 done
 shift $((OPTIND - 1))
 
-pandoc $1 --from $markup --to html --standalone --css=$css -o $1.html --quiet
+pandoc $1 --from $markup --to html --standalone --embed-resources --css=$css -o $1.html
 
 if [[ $show = 1 ]]; then
     open $1.html
