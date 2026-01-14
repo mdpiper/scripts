@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 # Render a Markdown or reStructuredText file as HTML and view in a browser.
 
-help="Usage: mview FILE [-u] [-h]"
+help="Usage: mview [-u] [-h] FILE"
 browser="Firefox"
 show=1
 markup="markdown"
@@ -14,7 +14,6 @@ while getopts ":uh" opt; do
   case $opt in
   u)
       show=0
-      echo "hi!"
       ;;
   h)
       echo -e $help
@@ -33,7 +32,6 @@ shift $((OPTIND - 1))
 pandoc $1 --from $markup --to html -o $1.html
 
 if [[ $show = 1 ]]; then
-    echo "show = $show"
     open $1.html
 fi
 
