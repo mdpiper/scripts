@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Removes temporary files and such.
 
-types="*~ .*~ *.pyc #* *.o *.so *.mod"
+types="*~ .*~ *.pyc #* *.o *.so *.mod slurm-*"
 echo "Removing:"
 rm -fv $types
