@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-# Build/install a project that uses CMake and a conda environment.
+# Build/install a conda/CMake project.
 
 build_type=debug  # release or debug
 build_dir=_build
