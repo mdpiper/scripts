@@ -1,7 +1,18 @@
 #! /usr/bin/env bash
 # Build/install a conda/CMake project.
 
-build_type=debug  # release or debug
+help() {
+    echo -e "Usage: cbuild [debug|release|help]"
+}
+
+if [ "$1" == "debug" ]; then
+    build_type=debug
+elif [ "$1" == "release" ]; then
+    build_type=release
+else
+    help && exit 0
+fi
+
 build_dir=_build
 
 trap "exit 1" ERR
